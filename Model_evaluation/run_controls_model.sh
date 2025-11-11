@@ -42,14 +42,14 @@ for fold in ${fold_list//,/ }; do
 		OUTDIR=accessibility_model/${tissue}/results_${fold}_${tissue}_DeepSTARR_rep${rep}/enhancer
 		pred_script=${script_path}/Predict_CNN_model_from_fasta.py
 		model=${OUTDIR}/Model
-		scripts/functions/my_bsub_gridengine -n act_predict_random \
-											 -o ${OUTDIR}/log_predictions \
-											 -m 40 \
-											 -T '4:00:00' \
-											 "${pred_script} \
-											 -s accessibility_model_dataset/${tissue}/${fold} \
-											 -m ${model} \
-											 -o ${OUTDIR}"
+		bin/my_bsub_gridengine -n act_predict_random \
+							   -o ${OUTDIR}/log_predictions \
+							   -m 40 \
+							   -T '4:00:00' \
+							   "${pred_script} \
+							   -s accessibility_model_dataset/${tissue}/${fold} \
+							   -m ${model} \
+							   -o ${OUTDIR}"
 
 		done
 	done
