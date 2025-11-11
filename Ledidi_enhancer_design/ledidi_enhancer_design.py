@@ -256,7 +256,7 @@ def transfer_weights(model2, tfweights):
     model2.load_state_dict(state_dict)
     return model2
 
-params_DeepSTARR2_access = {
+params_DeepSTARR_access = {
     'batch_size': 128,
     'epochs': 100,
     'early_stop': 10,
@@ -278,9 +278,9 @@ params_DeepSTARR2_access = {
     'act': 'relu'
 }
 
-class DeepSTARR2_access(nn.Module):
-    def __init__(self, params=params_DeepSTARR2_access):
-        super(DeepSTARR2_access, self).__init__()
+class DeepSTARR_access(nn.Module):
+    def __init__(self, params=params_DeepSTARR_access):
+        super(DeepSTARR_access, self).__init__()
         self.params = params
 
 
@@ -439,7 +439,7 @@ def transfer_weights_access(model, tfweights):
     model.load_state_dict(state_dict)
     return model
 
-params_DeepSTARR2_enhancer = {
+params_DeepSTARR_enhancer = {
     'batch_size': 128,
     'epochs': 100,
     'early_stop': 10,
@@ -461,9 +461,9 @@ params_DeepSTARR2_enhancer = {
     'act': 'relu'
 }
 
-class DeepSTARR2_enhancer(nn.Module):
-    def __init__(self, params=params_DeepSTARR2_enhancer):
-        super(DeepSTARR2_enhancer, self).__init__()
+class DeepSTARR_enhancer(nn.Module):
+    def __init__(self, params=params_DeepSTARR_enhancer):
+        super(DeepSTARR_enhancer, self).__init__()
         self.params = params
 
         self.bn_params = {'momentum': 0.99, 'eps': 1e-3}
@@ -551,7 +551,7 @@ class DeepSTARR2_enhancer(nn.Module):
 
         return x
    
-class DeepSTARR2_enhancer_logits(nn.Module):
+class DeepSTARR_enhancer_logits(nn.Module):
     def __init__(self, original_model):
         super().__init__()
 
@@ -611,7 +611,7 @@ modelt_enhancer.compile()
 modelt_enhancer.load_weights(parameter_enhancer)
 
 
-enhancer_model = DeepSTARR2_enhancer()
+enhancer_model = DeepSTARR_enhancer()
 
 tfweights_enhancer = modelt_enhancer.get_weights()
 enhancer_model = transfer_weights(enhancer_model, tfweights_enhancer)
@@ -630,7 +630,7 @@ modelt_access.compile()
 modelt_access.load_weights(parameter_access)
 
 # Create PyTorch accessibility model
-access_model = DeepSTARR2_access()
+access_model = DeepSTARR_access()
 
 # Transfer weights
 tfweights_access = modelt_access.get_weights()
@@ -638,7 +638,7 @@ access_model = transfer_weights_access(access_model, tfweights_access)
 access_model.eval()
 
 # remove the last layer from enhancer prediction model
-enhancer_model_without_last_layer = DeepSTARR2_enhancer_logits(enhancer_model)
+enhancer_model_without_last_layer = DeepSTARR_enhancer_logits(enhancer_model)
 enhancer_model_without_last_layer.eval()
 
 
