@@ -133,7 +133,7 @@ Where:
 
 We recommend using the models from the different folds and average the prediction scores for a more robust prediction.
 
-## Tissue specific enhancer design
+## Design new tissue-specific enhancers
 To design tissue specific enhancers for your favourite tissue among three tissues (heart, limb and CNS) in mouse embryo, please run:
 ```
 # Clone this repository
