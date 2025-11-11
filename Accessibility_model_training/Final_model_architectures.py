@@ -19,10 +19,10 @@ def Spearman(y_true, y_pred):
 
 
 #########
-### DeepSTARR2
+### DeepSTARR
 #########
 
-params_DeepSTARR2 = {'batch_size': 128,
+params_DeepSTARR = {'batch_size': 128,
           'epochs': 100,
           'early_stop': 5,
           'kernel_size1': 7,
@@ -42,7 +42,7 @@ params_DeepSTARR2 = {'batch_size': 128,
           'pad':'same',
           'act':'relu'}
 
-def DeepSTARR2(params=params_DeepSTARR2):
+def DeepSTARR(params=params_DeepSTARR):
     
     dropout_prob = params['dropout_prob']
     
