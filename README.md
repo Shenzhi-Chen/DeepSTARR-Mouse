@@ -100,7 +100,7 @@ The design process starts with 1,200 random DNA sequences for each tissue. These
 These seed sequences are then optimized using both the sequence-to-accessibility and sequence-to-activity models with the following parameters:
 *   **Target Accessibility Score:** 12
 *   **Target Activity Score:** 14
-*   **Edit Penalty:** `0.1` (to limit the number and magnitude of edits)
+*   **Edit Penalty:** `0.1` (limit the number of edits)
 
 For activity optimization, pre-sigmoid logits are used instead of the final sigmoid output to avoid gradient saturation and improve optimization stability.
 
