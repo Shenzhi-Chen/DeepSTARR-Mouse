@@ -1,21 +1,22 @@
 ## DeepSTARR-Mouse
-DeepSTARR‑Mouse is a Convolutional Neural Network (CNN) adapted from the previously published DeepSTARR architecture (Nature Genetics, 2022). This model is designed for use in a transfer‑learning framework to predict enhancer activity in E11.5 mouse embryos. For each tissue, CNNs are pre‑trained on DNA accessibility data (i.e., ATAC‑seq) and fine‑tuned on a limited set of experimentally validated enhancers (VISTA enhancer browser, https://enhancer.lbl.gov/vista/).
 
-*<ins>Targeted Design of Mammalian Tissue-Specific Enhancers In Vivo</ins>*  
+DeepSTARR-Mouse is a Convolutional Neural Network (CNN) adapted from the previously published DeepSTARR architecture (Nature Genetics, 2022). This model is designed for use in a transfer-learning framework to predict enhancer activity in E11.5 mouse embryos. For each tissue, CNNs are pre-trained on DNA accessibility data (i.e., ATAC-seq) and fine-tuned on a limited set of experimentally validated enhancers (VISTA enhancer browser, [https://enhancer.lbl.gov/vista/](https://enhancer.lbl.gov/vista/)).
+
+*Targeted Design of Mammalian Tissue-Specific Enhancers In Vivo*
 Shenzhi Chen, Vincent Loubiere, Ethan W. Hollingsworth, Sandra H. Jacinto, Atrin Dizehchi, Jacob Schreiber, Evgeny Z. Kvon, Alexander Stark. 2025
 
-This repository contains the code used to to train the models, make predictions and design tissue-specific enhancers by Ledidi (https://www.biorxiv.org/content/10.1101/2025.04.22.650035v1).
+This repository contains the code used to train the models, make predictions, and design tissue-specific enhancers by [Ledidi](https://www.biorxiv.org/content/10.1101/2025.04.22.650035v1).
 
 ## Sequence-to-accessibility Model training
 Data were used for Sequence-to-accessibility model training are uploaded at HuggingFace (https://huggingface.co/datasets/Shenzhi-Chen/DeepSTARR-Mouse-dataset/accessibility_model_dataset).
-To train models across 3 Cross-validation folds for 3 tissues (heart, limb and midbrain(CNS))and evaluate them, download the training data (accessibility_model_dataset), run following script:
+To train and evaluate models across 3 cross-validation folds for 3 tissues (heart, limb, and midbrain/CNS), download the `accessibility_model_dataset` and run the following script:
 ```
 Accessibility_model_training/Run_models.sh
 ```
 
-This script will train 2 replicates for each 3 Cross-validation folds of 3 tissues and you will get 18 models in sum, for each of them this scripts will make predictions and compute nucleotide contribution scores on held-out test dataset.
+This script trains 2 replicates for each of the 3 cross-validation folds across the 3 tissues, creating a total of 18 models. For each model, it generates predictions and computes nucleotide contribution scores on the held-out test dataset.
 
-Outputs are speprately saved, as cross-validation fold 1 and replicate 1 for heart as a example, all outputs is saved under accessibility_model/heart/results_fold01_heart_DeepSTARR_rep1.
+Outputs are saved in separate directories. For example, the output for the heart model from fold 1, replicate 1 is located at:
 ```
 accessibility_model/heart/results_fold01_heart_DeepSTARR_rep1
 
@@ -34,14 +35,14 @@ accessibility_model/heart/results_fold01_heart_DeepSTARR_rep1
 
 ## Sequence-to-activity Model training
 Data were used for Sequence-to-activity model training are uploaded at HuggingFace (https://huggingface.co/datasets/Shenzhi-Chen/DeepSTARR-Mouse-dataset/tree/main/enhancer_activity_model_dataset). Data were used for evaluation model are uploaded at HuggingFace (https://huggingface.co/datasets/Shenzhi-Chen/DeepSTARR-Mouse-dataset/tree/main/testing_dataset).
-To train models across 3 Cross-validation folds for 3 tissues (heart, limb and midbrain(CNS))and evaluate them, download the training data (enhancer_activity_model_dataset), run following script:
+To train and evaluate models across 3 cross-validation folds for 3 tissues (heart, limb, and midbrain/CNS), download the `enhancer_activity_model_dataset` and run the following script:
 ```
 Enhancer_activity_model_training/Run_models.sh
 ```
 
-This script will train 2 replicates for each 3 Cross-validation folds of 3 tissues and you will get 18 models in sum, for each of them this scripts will make predictions and compute nucleotide contribution scores on held-out test dataset.
+This script trains 2 replicates for each of the 3 cross-validation folds across the 3 tissues, creating a total of 18 models. For each model, it generates predictions and computes nucleotide contribution scores on the held-out test dataset.
 
-Outputs are speprately saved, as cross-validation fold 1 and replicate 1 for heart as a example, all outputs is saved under enhancer_activity_model/heart/results_fold01_heart_DeepSTARR_rep1.
+Outputs are saved in separate directories. For example, the output for the heart model from fold 1, replicate 1 is located at:
 ```
 enhancer_activity_model/heart/results_fold01_heart_DeepSTARR_rep1
 
@@ -59,14 +60,14 @@ enhancer_activity_model/heart/results_fold01_heart_DeepSTARR_rep1
 ```
 
 ## Control model training
-To compare with transfer learing, we applied two alternatives:
-(i) models trained directly on annotated VISTA enhancers without pre‑training.
-(ii) predictions from the sequence‑to‑accessibility models (scaled to [0, 1] and used as activity predictions).		
-run following script:
+To benchmark the performance of transfer learning, we implemented two alternative control strategies:
+(i).  **Direct Training:** Models trained directly on annotated VISTA enhancers without a pre-training step.
+(ii).  **Accessibility Model Predictions:** Predictions from the sequence-to-accessibility models, which are scaled to a [0, 1] range and used as a proxy for enhancer activity.
+To run these control experiments, execute the following script:
 ```
 Model_evaluation/run_control_models.sh
 ```
-(i) As cross-validation fold 1 and replicate 1 directly trained model for heart as an example, is saved under enhancer_activity_model/heart/results_fold01_heart_DeepSTARR_rep1_init_random:
+(i) The output for a model trained directly on enhancer data (e.g., for heart, fold 1, replicate 1) is saved at:
 ```
 enhancer_activity_model/heart/results_fold01_heart_DeepSTARR_rep1_init_random
 
@@ -78,7 +79,7 @@ enhancer_activity_model/heart/results_fold01_heart_DeepSTARR_rep1_init_random
 - fold01_sequences_test.fa_predictions_Model.txt
 ```
 
-(ii) As cross-validation fold 1 and replicate 1 trained model for heart as an example, prediction from the sequence‑to‑accessibility model is saved under accessibility_model/heart/results_fold01_heart_DeepSTARR_rep1:
+(ii) The enhancer activity predictions derived from the corresponding sequence-to-accessibility model (e.g., for heart, fold 1, replicate 1) are saved at:
 ```
 accessibility_model/heart/results_fold01_heart_DeepSTARR_rep1/enhancer
 
@@ -86,14 +87,32 @@ accessibility_model/heart/results_fold01_heart_DeepSTARR_rep1/enhancer
 - fold01_sequences_test.fa_predictions_Model.txt
 ```
 
-## Ledidi tissue specific enhancer design
-For each tissue, 1,200 random DNA sequences were generated with dinucleotide frequencies matched to VISTA sequences and used as input for Ledidi, a model‑guided gradient optimization approach (https://www.biorxiv.org/content/10.1101/2025.04.22.650035v1). To limit the number and magnitude of edits, the edit‑penalty parameter was set to 0.1. Seed sequences were then optimized using both the sequence‑to‑accessibility and sequence‑to‑activity models, with target predicted values set to 12 and 14, respectively. For activity optimization, the final sigmoid layer was removed and pre‑sigmoid logits were used to avoid gradient saturation and improve optimization stability. The reference sequences, which used to adjust dinucleotide frequencies were uploaded at HuggingFace (https://huggingface.co/datasets/Shenzhi-Chen/DeepSTARR-Mouse-dataset/tree/main/testing_dataset). Run following script:
+### Ledidi Tissue-Specific Enhancer Design
+
+This section describes how to design novel tissue-specific enhancers using **Ledidi**, a model-guided gradient optimization approach ([Jacob et al., 2022](https://www.biorxiv.org/content/10.1101/2025.04.22.650035v1)).
+
+#### Methodology
+
+The design process starts with 1,200 random DNA sequences for each tissue. These sequences are generated with dinucleotide frequencies matched to known VISTA enhancers to ensure a realistic starting point.
+
+*   **Reference Sequences:** The VISTA sequences used for frequency matching are available on Hugging Face: [testing_dataset](https://huggingface.co/datasets/Shenzhi-Chen/DeepSTARR-Mouse-dataset/tree/main/testing_dataset).
+
+These seed sequences are then optimized using both the sequence-to-accessibility and sequence-to-activity models with the following parameters:
+*   **Target Accessibility Score:** 12
+*   **Target Activity Score:** 14
+*   **Edit Penalty:** `0.1` (to limit the number and magnitude of edits)
+
+For activity optimization, pre-sigmoid logits are used instead of the final sigmoid output to avoid gradient saturation and improve optimization stability.
+
+#### Execution
+
+To run the enhancer design process, execute the following script:
 ```
 Ledidi_enhancer_design/run_ledidi_enhancer_design.sh
 ```
-This script apply trained 2 replicates for each 3 Cross-validation folds of 3 tissues model to design tissue specific enhancer. This script will randomly generate DNA sequences, and optimize both DNA accessibility and enhancer activity for targeted tissue, in each batch it will generate 20 sequences from single model to save memory usage and there are 10 batch, in sum this scripts will design 1,200 sequences for each tissue.
+This script applies all 18 trained models (2 replicates x 3 folds x 3 tissues) to design enhancers. To manage memory, it processes the sequences in batches, generating 20 sequences per model in each of the 10 batches. This results in a total of **1,200 designed sequences** for each tissue.
 
-Outputs are speprately saved, as cross-validation fold 1 and replicate 1 for heart model batch 1 design as a example, designed sequences is saved under ledidi_design/heart/results_fold01_heart_DeepSTARR_rep1/1
+The designed sequences are saved in separate directories. For example, the output for the heart model from fold 1, replicate 1, batch 1 is located at:
 ```
 ledidi_design/heart/results_fold01_heart_DeepSTARR_rep1/1
 
@@ -133,8 +152,9 @@ Where:
 
 We recommend using the models from the different folds and average the prediction scores for a more robust prediction.
 
-## Design new tissue-specific enhancers
-To design tissue specific enhancers for your favourite tissue among three tissues (heart, limb and CNS) in mouse embryo, please run:
+### Designing New Tissue-Specific Enhancers
+
+To design your own tissue-specific enhancers for heart, limb, or CNS in the mouse embryo, follow the steps below.
 ```
 # Clone this repository
 git https://github.com/Shenzhi-Chen/DeepSTARR-Mouse.git
@@ -166,15 +186,15 @@ python Ledidi_enhancer_design/ledidi_enhancer_design.py \
 ```
 
 Where:
-* -i FASTA file with 1,001 bp DNA sequences as reference for random sequence generation
-* -w Number of designed sequences
-* -v sequence-to-activity model used for enhancer activity optimization
-* -x sequence-to-accessibility model used for DNA accessibility optimization
-* -a output directory
-* -o 1/0 Not adjust dinuceotide ratio/Adjust dinuceotide ratio for random generated sequences
-* -y Targeted DNA accessibility score
-* -z Targeted enhancer activity score
-* -l Edit‑penalty parameter, The smaller this value the less edit on starting sequences
+* -i Path to the FASTA file used as a reference for random sequence generation (e.g., all_vista_seq.fa).
+* -w The number of enhancers to design.
+* -v Path to the sequence-to-activity model used for sequence enhancer activity optimization
+* -x Path to the sequence-to-accessibility model used for sequence DNA accessibility optimization
+* -a The directory where designed sequences will be saved.
+* -o 1/0 Set to 0 to adjust dinucleotide frequencies of random sequences to match the reference, or 1 to skip adjustment.
+* -y The target score for DNA accessibility optimization.
+* -z The target score for enhancer activity optimization.
+* -l A parameter to control the magnitude of edits. Smaller values result in fewer edits to the starting sequences.
 
 ## Questions
 If you have any questions/requests/comments please contact me at [shenzhichen1999@gmail.com](mailto:shenzhichen1999@gmail.com).
