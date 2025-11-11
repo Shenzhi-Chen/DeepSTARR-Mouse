@@ -2,7 +2,7 @@
 tissue_list="midbrain,heart,limb"
 fold_list="fold01,fold02,fold03"
 script_path=accessibility_models
-arch=DeepSTARR2
+arch=DeepSTARR
 InputID=accessibility_model_dataset
 OUTDIR=accessibility_model
 Contribution_score=1 #if compute nucleotide contribution score
