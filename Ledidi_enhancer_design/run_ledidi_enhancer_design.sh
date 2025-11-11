@@ -17,7 +17,7 @@ for fold in ${fold_list//,/ }; do
       for i in ${loop//,/ }; do
       enhancer=enhancer_activity_models/${tissue}/results_${fold}_${tissue}_DeepSTARR_rep${rep}/Model
       access=accessibility_models/${tissue}/results_${fold}_${tissue}_DeepSTARR_rep${rep}/Model
-      OUTDIR=ledidi_design/${tissue}/${i}
+      OUTDIR=ledidi_design/${tissue}/results_${fold}_${tissue}_DeepSTARR_rep${rep}/${i}
 
       mkdir ${OUTDIR}
       mkdir ${OUTDIR}/log_enhancer_design
