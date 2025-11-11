@@ -8,7 +8,7 @@ Shenzhi Chen, Vincent Loubiere, Ethan W. Hollingsworth, Sandra H. Jacinto, Atrin
 This repository contains the code used to train the models, make predictions, and design tissue-specific enhancers by [Ledidi](https://www.biorxiv.org/content/10.1101/2025.04.22.650035v1).
 
 ## Sequence-to-accessibility Model training
-Data were used for Sequence-to-accessibility model training are uploaded at HuggingFace (https://huggingface.co/datasets/Shenzhi-Chen/DeepSTARR-Mouse-dataset/accessibility_model_dataset).
+Data were used for Sequence-to-accessibility model training are uploaded at Hugging Face: [accessibility_model_dataset](https://huggingface.co/datasets/Shenzhi-Chen/DeepSTARR-Mouse-dataset/accessibility_model_dataset).
 To train and evaluate models across 3 cross-validation folds for 3 tissues (heart, limb, and midbrain/CNS), download the `accessibility_model_dataset` and run the following script:
 ```
 Accessibility_model_training/Run_models.sh
@@ -34,7 +34,7 @@ accessibility_model/heart/results_fold01_heart_DeepSTARR_rep1
 ```
 
 ## Sequence-to-activity Model training
-Data were used for Sequence-to-activity model training are uploaded at HuggingFace (https://huggingface.co/datasets/Shenzhi-Chen/DeepSTARR-Mouse-dataset/tree/main/enhancer_activity_model_dataset). Data were used for evaluation model are uploaded at HuggingFace (https://huggingface.co/datasets/Shenzhi-Chen/DeepSTARR-Mouse-dataset/tree/main/testing_dataset).
+Data were used for Sequence-to-activity model training are uploaded at Hugging Face: [enhancer_activity_models](https://huggingface.co/datasets/Shenzhi-Chen/DeepSTARR-Mouse-dataset/tree/main/enhancer_activity_model_dataset). Data were used for evaluation model are uploaded at Hugging Face: [testing_dataset](https://huggingface.co/datasets/Shenzhi-Chen/DeepSTARR-Mouse-dataset/tree/main/testing_dataset).
 To train and evaluate models across 3 cross-validation folds for 3 tissues (heart, limb, and midbrain/CNS), download the `enhancer_activity_model_dataset` and run the following script:
 ```
 Enhancer_activity_model_training/Run_models.sh
@@ -127,7 +127,7 @@ To predict the accessibility levels or enhancer activity score in a given tissue
 git https://github.com/Shenzhi-Chen/DeepSTARR-Mouse.git
 cd DeepSTARR-Mouse
 
-# download a Sequence-to-accessibility or Sequence-to-activity model from HuggingFace https://huggingface.co/Shenzhi-Chen/DeepSTARR-Mouse
+# download a Sequence-to-accessibility or Sequence-to-activity model from Hugging Face https://huggingface.co/Shenzhi-Chen/DeepSTARR-Mouse
 # example with Sequence-to-accessibility model for heart fold01 replicate1 as accessibility_models/heart/results_fold01_heart_DeepSTARR_rep1/Model*
 
 # create 'DeepSTARR' conda environment by running the following:
@@ -160,8 +160,8 @@ To design your own tissue-specific enhancers for heart, limb, or CNS in the mous
 git https://github.com/Shenzhi-Chen/DeepSTARR-Mouse.git
 cd DeepSTARR-Mouse
 
-# download both Sequence-to-accessibility and Sequence-to-activity model for your favourite tissue from HuggingFace https://huggingface.co/Shenzhi-Chen/DeepSTARR-Mouse
-# download reference VISTA sequences for randomly generated sequences dinucleotide frequency adjustment from HuggingFace https://huggingface.co/datasets/Shenzhi-Chen/DeepSTARR-Mouse-dataset/tree/main/testing_dataset
+# download both Sequence-to-accessibility and Sequence-to-activity model for your favourite tissue from Hugging Face https://huggingface.co/Shenzhi-Chen/DeepSTARR-Mouse
+# download reference VISTA sequences for randomly generated sequences dinucleotide frequency adjustment from Hugging Face https://huggingface.co/datasets/Shenzhi-Chen/DeepSTARR-Mouse-dataset/tree/main/testing_dataset
 # example with heart fold01 replicate1 using accessibility_models/heart/results_fold01_heart_DeepSTARR_rep1/Model and enhancer_activity_models/heart/results_fold01_heart_DeepSTARR_rep1/Model 
 
 # create 'DeepSTARR' conda environment by running the following:
