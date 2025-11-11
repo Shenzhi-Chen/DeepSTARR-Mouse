@@ -39,6 +39,48 @@ To train models across 3 Cross-validation folds for 3 tissues (heart, limb and m
 Enhancer_activity_model_training/Run_models.sh
 ```
 
+This script will train 2 replicates for each 3 Cross-validation folds of 3 tissues and you will get 18 models in sum, for each of them this scripts will make predictions and compute nucleotide contribution scores on held-out test dataset.
 
+Outputs are speprately saved, as cross-validation fold 1 and replicate 1 for heart as a example, all outputs is saved under enhancer_activity_model/heart/results_fold01_heart_DeepSTARR_rep1.
+```
+enhancer_activity_model/heart/results_fold01_heart_DeepSTARR_rep1
 
+# Trained model
+- Model.json # Model archeticture
+- Model.h5 # Trained model weights
 
+# Predictions on held-out test dataset
+- fold01_sequences_test.fa_predictions_Model.txt
+
+# Nuceotide contribution score with sequences one-hot code
+- fold01_sequences_test_onehot.npz # Sequence one-hot code 
+- fold01_sequences_test_contrib.npz # Nucleotide contribution score
+- Model_fold01_sequences_test.fa_dinuc_shuffle_deepSHAP_DeepExplainer_importance_scores.h5 # Combined h5 file
+```
+
+## Control model training
+To compare with transfer learing, we applied two alternatives:
+(i) models trained directly on annotated VISTA enhancers without pre‑training.
+(ii) predictions from the sequence‑to‑accessibility models (scaled to [0, 1] and used as activity predictions).		
+```
+Model_evaluation/run_control_models.sh
+```
+(i) As cross-validation fold 1 and replicate 1 directly trained model for heart as an example, is saved under enhancer_activity_model/heart/results_fold01_heart_DeepSTARR_rep1_init_random:
+```
+enhancer_activity_model/heart/results_fold01_heart_DeepSTARR_rep1_init_random
+
+# Trained model
+- Model.json # Model archeticture
+- Model.h5 # Trained model weights
+
+# Predictions on held-out test dataset
+- fold01_sequences_test.fa_predictions_Model.txt
+```
+
+(ii) As cross-validation fold 1 and replicate 1 trained model for heart as an example, prediction from the sequence‑to‑accessibility model is saved under accessibility_model/heart/results_fold01_heart_DeepSTARR_rep1:
+```
+accessibility_model/heart/results_fold01_heart_DeepSTARR_rep1/enhancer
+
+# Enhancer predicted activity from the sequence‑to‑accessibility models
+- fold01_sequences_test.fa_predictions_Model.txt
+```
