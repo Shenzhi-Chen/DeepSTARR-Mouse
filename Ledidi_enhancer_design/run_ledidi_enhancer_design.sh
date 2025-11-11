@@ -11,26 +11,32 @@ acc="12"
 act="14"
 lamda="0.1"
 
-for i in ${loop//,/ }; do
-enhancer=enhancer_activity_models/${tissue}/results_${fold}_${tissue}_DeepSTARR_rep${rep}/Model
-access=accessibility_models/${tissue}/results_${fold}_${tissue}_DeepSTARR_rep${rep}/Model
-OUTDIR=ledidi_design/${tissue}/${i}
+for fold in ${fold_list//,/ }; do
+  for tissue in ${tissue_list//,/ }; do
+    for rep in 1 2; do
+      for i in ${loop//,/ }; do
+      enhancer=enhancer_activity_models/${tissue}/results_${fold}_${tissue}_DeepSTARR_rep${rep}/Model
+      access=accessibility_models/${tissue}/results_${fold}_${tissue}_DeepSTARR_rep${rep}/Model
+      OUTDIR=ledidi_design/${tissue}/${i}
 
-mkdir ${OUTDIR}
-mkdir ${OUTDIR}/log_enhancer_design
-scripts/functions/my_bsub_gridengine -m 10 \
-                                    -n design_adjust_${tissues}_${i} \
-                                    -o ${OUTDIR}/log_enhancer_design \
-                                    -T '2:00:00' \
-                                    -P g -G "gpu:1" \
-                                     "${script_path}/ledidi_enhancer_design.py \
-                                     -i ${referenece} \
-                                     -w 10 \
-                                     -v ${enhancer} \
-                                     -x ${access} \
-                                     -a ${OUTDIR} \
-                                     -o 0 \
-                                     -y ${acc} \
-                                     -z ${act} \
-                                     -l ${lamda} "
+      mkdir ${OUTDIR}
+      mkdir ${OUTDIR}/log_enhancer_design
+      scripts/functions/my_bsub_gridengine -m 10 \
+                                           -n design_adjust_${tissues}_${i} \
+                                           -o ${OUTDIR}/log_enhancer_design \
+                                           -T '2:00:00' \
+                                           -P g -G "gpu:1" \
+                                           "${script_path}/ledidi_enhancer_design.py \
+                                           -i ${referenece} \
+                                           -w 20 \
+                                           -v ${enhancer} \
+                                           -x ${access} \
+                                           -a ${OUTDIR} \
+                                           -o 0 \
+                                           -y ${acc} \
+                                           -z ${act} \
+                                           -l ${lamda} "
+    done
+   done
+  done
 done
