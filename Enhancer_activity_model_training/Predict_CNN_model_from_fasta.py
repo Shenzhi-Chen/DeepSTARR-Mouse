@@ -55,7 +55,7 @@ from sklearn.model_selection import train_test_split, StratifiedKFold, GridSearc
 
 import sys
 sys.path.append('bin/')
-from helper import IOHelper, SequenceHelper # from https://github.com/bernardo-de-almeida/Neural_Network_DNA_Demo.git
+from helper import IOHelper, SequenceHelper 
 
 import random
 random.seed(1234)
