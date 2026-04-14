@@ -157,7 +157,6 @@ Expected runtime for demo sequences design on a CPU-based desktop/workstation: ~
 
 To predict the accessibility levels or enhancer activity score in a given tissue of the mouse embryo for new DNA sequences, please run:
 ```
-
 # Run prediction script on fasta files with 1,001 bp sequences
 python Accessibility_model_training/Predict_CNN_model_from_fasta.py \
   -s Sequences_example.fa \
