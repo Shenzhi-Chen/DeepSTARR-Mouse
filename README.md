@@ -57,12 +57,12 @@ Expected runtime for demo on a GPU-based desktop/workstation: ~30 min.
 Run demo on demo_dataset/accessibility_data run the following script:
 ```
 accessibility_models/Train_DeepSTARR_and_interpretation.sh \
-    		    -d demo_dataset/accessbility_dataset/demo \
-    		  	-a DeepSTARR \
+            -d demo_dataset/accessbility_dataset/demo \
+            -a DeepSTARR \
             -v score \
-    		  	-o demo \
+            -o demo \
             -p demo_dataset/accessbility_dataset/demo_sequences_test.fa \
-    		  	-c 1 \
+            -c 1 \
             -t heart \
             -f demo
 ```
