@@ -9,6 +9,24 @@ This repository contains the code used to train the models, make predictions, an
 
 Not required for demo or inference; GPU acceleration is recommended for model training and large-scale sequence design.
 
+## System requirements
+
+DeepSTARR-Mouse was developed and tested in Linux environments with Python 3.7.  
+Model inference can be run on a standard CPU-based desktop or workstation.  
+GPU acceleration is recommended for model training, nucleotide contribution scoring, and large-scale enhancer design.  
+The models used in this study were trained on CUDA-compatible NVIDIA GPUs.
+
+## Software dependencies
+
+Main dependencies include:
+- python 3.7
+- tensorflow 2.4.1
+- keras 2.4.3
+- h5py < 3.0.0
+- deeplift 0.6.13.0
+- shap (installed from GitHub)
+- ledidi 2.1.0 (required for enhancer design)
+
 ## Installation
 
 To install DeepSTARR-Mouse for model training, sequence prediction, and de novo enhancer design, please run the commands below.
@@ -218,6 +236,10 @@ Where:
 * -y The target score for DNA accessibility optimization.
 * -z The target score for enhancer activity optimization.
 * -l A parameter to control the magnitude of edits. Smaller values result in fewer edits to the starting sequences.
+
+## License
+
+This project is released under the MIT License.
 
 ## Questions
 If you have any questions/requests/comments please contact me at [shenzhichen1999@gmail.com](mailto:shenzhichen1999@gmail.com).
