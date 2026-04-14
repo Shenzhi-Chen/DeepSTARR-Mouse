@@ -53,7 +53,7 @@ pip install deeplift==0.6.13.0
 ## Sequence-to-accessibility Model training
 Data were used for Sequence-to-accessibility model training are uploaded at Hugging Face: [accessibility_model_dataset](https://huggingface.co/datasets/Shenzhi-Chen/DeepSTARR-Mouse-dataset/accessibility_model_dataset).
 
-Expected runtime for the demo on a GPU-based desktop/workstation: ~30 min.
+Expected runtime for the demo on a GPU-based desktop/workstation: ~20 min.
 
 To run the heart demo accessibility model training and generate predictions on the demo test dataset in `demo_dataset/accessibility_dataset`, run:
 
@@ -69,7 +69,7 @@ accessibility_models/Train_DeepSTARR_and_interpretation.sh \
             -f demo
 ```
 
-Expected runtime for 1 folds 1 replicates for on tissue on a GPU-based desktop/workstation: ~1 min.
+Expected runtime for 1 folds 1 replicates for on tissue on a GPU-based desktop/workstation: ~1-2 hour.
 
 To train and evaluate models across 3 cross-validation folds for 3 tissues (heart, limb, midbrain/CNS), download the `accessibility_model_dataset` and run the following script:
 ```
@@ -98,7 +98,7 @@ accessibility_model/heart/results_fold01_heart_DeepSTARR_rep1
 ## Sequence-to-activity Model training
 Data were used for Sequence-to-activity model training are uploaded at Hugging Face: [enhancer_activity_models](https://huggingface.co/datasets/Shenzhi-Chen/DeepSTARR-Mouse-dataset/tree/main/enhancer_activity_model_dataset). Data were used for evaluation model are uploaded at Hugging Face: [testing_dataset](https://huggingface.co/datasets/Shenzhi-Chen/DeepSTARR-Mouse-dataset/tree/main/testing_dataset).
 
-Expected runtime for the demo on a GPU-based desktop/workstation: ~30 min.
+Expected runtime for the demo on a GPU-based desktop/workstation: ~20 min.
 
 To run the heart demo activity model training and generate predictions on the demo test dataset in `demo_dataset/activity_data`, run:
 
@@ -190,7 +190,7 @@ For activity optimization, pre-sigmoid logits are used instead of the final sigm
 
 #### Execution
 
-Expected runtime for 1,200 sequences design on a GPU-based desktop/workstation: ~1 hour.
+Expected runtime for 1,200 sequences design on a GPU-based desktop/workstation: ~20 min.
 
 To run the enhancer design process, execute the following script:
 ```
