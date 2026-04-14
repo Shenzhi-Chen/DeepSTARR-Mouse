@@ -2,19 +2,45 @@
 
 DeepSTARR-Mouse is a Convolutional Neural Network (CNN) adapted from the previously published DeepSTARR architecture [(Nature Genetics, 2022)](https://www.nature.com/articles/s41588-022-01048-5). This model is designed for use in a transfer-learning framework to predict enhancer activity in E11.5 mouse embryos. For each tissue, CNNs are pre-trained on DNA accessibility data (i.e., ATAC-seq) and fine-tuned on a limited set of experimentally validated enhancers (VISTA enhancer browser, [https://enhancer.lbl.gov/vista/](https://enhancer.lbl.gov/vista/)).
 
-*Targeted Design of Mammalian Tissue-Specific Enhancers In Vivo*
-Shenzhi Chen, Vincent Loubiere, Ethan W. Hollingsworth, Sandra H. Jacinto, Atrin Dizehchi, Jacob Schreiber, Evgeny Z. Kvon, Alexander Stark. 2025
+*Predictive design of tissue-specific mammalian enhancers that function in vivo in the mouse embryo*
+Shenzhi Chen, Vincent Loubiere, Ethan W. Hollingsworth, Ken Murakami, Nikolaus Mandlburger, Sandra H. Jacinto, Atrin Dizehchi, Jacob Schreiber, Evgeny Z. Kvon, Alexander Stark. 2025
 
 This repository contains the code used to train the models, make predictions, and design tissue-specific enhancers by [Ledidi](https://www.biorxiv.org/content/10.1101/2025.04.22.650035v1).
 
+Not required for demo or inference; GPU acceleration is recommended for model training and large-scale sequence design.
+
+## Installation
+
+To install DeepSTARR-Mouse for training, prediction and design new enhancers, please run the following script:
+
+```
+# Clone this repository
+git clone https://github.com/Shenzhi-Chen/DeepSTARR-Mouse.git
+cd DeepSTARR-Mouse
+
+# download a Sequence-to-accessibility or Sequence-to-activity model from Hugging Face https://huggingface.co/Shenzhi-Chen/DeepSTARR-Mouse
+# example with Sequence-to-accessibility model for heart fold01 replicate1 as accessibility_models/heart/results_fold01_heart_DeepSTARR_rep1/Model*
+
+# create 'DeepSTARR' conda environment by running the following:
+conda create --name DeepSTARR_Mouse python=3.7 tensorflow=2.4.1 keras=2.4.3 # or tensorflow-gpu/keras-gpu if you are using a GPU
+source activate DeepSTARR_Mouse
+pip install git+https://github.com/AvantiShri/shap.git@master
+pip install 'h5py<3.0.0'
+pip install deeplift==0.6.13.0
+
+```
+
 ## Sequence-to-accessibility Model training
 Data were used for Sequence-to-accessibility model training are uploaded at Hugging Face: [accessibility_model_dataset](https://huggingface.co/datasets/Shenzhi-Chen/DeepSTARR-Mouse-dataset/accessibility_model_dataset).
-To train and evaluate models across 3 cross-validation folds for 3 tissues (heart, limb, and midbrain/CNS), download the `accessibility_model_dataset` and run the following script:
+
+Expected runtime for demo (1 fold and 1 replicate) on a GPU-based desktop/workstation: ~1-2 hour.
+
+To train and evaluate models across 3 cross-validation folds for 6 tissues (heart, limb, midbrain/CNS, forebrain, hindbrain and neural tube), download the `accessibility_model_dataset` and run the following script:
 ```
 Accessibility_model_training/Run_models.sh
 ```
 
-This script trains 2 replicates for each of the 3 cross-validation folds across the 3 tissues, creating a total of 18 models. For each model, it generates predictions and computes nucleotide contribution scores on the held-out test dataset.
+This script trains 2 replicates for each of the 3 cross-validation folds across the 6 tissues, creating a total of 36 models. For each model, it generates predictions and computes nucleotide contribution scores on the held-out test dataset.
 
 Outputs are saved in separate directories. For example, the output for the heart model from fold 1, replicate 1 is located at:
 ```
@@ -35,12 +61,15 @@ accessibility_model/heart/results_fold01_heart_DeepSTARR_rep1
 
 ## Sequence-to-activity Model training
 Data were used for Sequence-to-activity model training are uploaded at Hugging Face: [enhancer_activity_models](https://huggingface.co/datasets/Shenzhi-Chen/DeepSTARR-Mouse-dataset/tree/main/enhancer_activity_model_dataset). Data were used for evaluation model are uploaded at Hugging Face: [testing_dataset](https://huggingface.co/datasets/Shenzhi-Chen/DeepSTARR-Mouse-dataset/tree/main/testing_dataset).
-To train and evaluate models across 3 cross-validation folds for 3 tissues (heart, limb, and midbrain/CNS), download the `enhancer_activity_model_dataset` and run the following script:
+
+Expected runtime for demo (1 fold and 1 replicate) on a GPU-based desktop/workstation: ~1 hour.
+
+To train and evaluate models across 3 cross-validation folds for 6 tissues (heart, limb, midbrain/CNS, forebrain, hindbrain and neural tube), download the `enhancer_activity_model_dataset` and run the following script:
 ```
 Enhancer_activity_model_training/Run_models.sh
 ```
 
-This script trains 2 replicates for each of the 3 cross-validation folds across the 3 tissues, creating a total of 18 models. For each model, it generates predictions and computes nucleotide contribution scores on the held-out test dataset.
+This script trains 2 replicates for each of the 3 cross-validation folds across the 6 tissues, creating a total of 36 models. For each model, it generates predictions and computes nucleotide contribution scores on the held-out test dataset.
 
 Outputs are saved in separate directories. For example, the output for the heart model from fold 1, replicate 1 is located at:
 ```
@@ -63,6 +92,9 @@ enhancer_activity_model/heart/results_fold01_heart_DeepSTARR_rep1
 To benchmark the performance of transfer learning, we implemented two alternative control strategies:
 (i).  **Direct Training:** Models trained directly on annotated VISTA enhancers without a pre-training step.
 (ii).  **Accessibility Model Predictions:** Predictions from the sequence-to-accessibility models, which are scaled to a [0, 1] range and used as a proxy for enhancer activity.
+
+Expected runtime for demo (1 fold and 1 replicate) on a GPU-based desktop/workstation: ~1 hour.
+
 To run these control experiments, execute the following script:
 ```
 Model_evaluation/run_control_models.sh
@@ -106,6 +138,8 @@ For activity optimization, pre-sigmoid logits are used instead of the final sigm
 
 #### Execution
 
+Expected runtime for 1,200 sequences design on a GPU-based desktop/workstation: ~1 hour.
+
 To run the enhancer design process, execute the following script:
 ```
 Ledidi_enhancer_design/run_ledidi_enhancer_design.sh
@@ -121,21 +155,11 @@ ledidi_design/heart/results_fold01_heart_DeepSTARR_rep1/1
 ```
 
 ## Prediction for new DNA sequences
+
+Expected runtime for demo sequences design on a CPU-based desktop/workstation: ~3 min.
+
 To predict the accessibility levels or enhancer activity score in a given tissue of the mouse embryo for new DNA sequences, please run:
 ```
-# Clone this repository
-git clone https://github.com/Shenzhi-Chen/DeepSTARR-Mouse.git
-cd DeepSTARR-Mouse
-
-# download a Sequence-to-accessibility or Sequence-to-activity model from Hugging Face https://huggingface.co/Shenzhi-Chen/DeepSTARR-Mouse
-# example with Sequence-to-accessibility model for heart fold01 replicate1 as accessibility_models/heart/results_fold01_heart_DeepSTARR_rep1/Model*
-
-# create 'DeepSTARR' conda environment by running the following:
-conda create --name DeepSTARR_Mouse python=3.7 tensorflow=2.4.1 keras=2.4.3 # or tensorflow-gpu/keras-gpu if you are using a GPU
-source activate DeepSTARR_Mouse
-pip install git+https://github.com/AvantiShri/shap.git@master
-pip install 'h5py<3.0.0'
-pip install deeplift==0.6.13.0
 
 # Run prediction script on fasta files with 1,001 bp sequences
 python Accessibility_model_training/Predict_CNN_model_from_fasta.py \
@@ -153,6 +177,8 @@ Where:
 We recommend using the models from the different folds and average the prediction scores for a more robust prediction.
 
 ### Designing New Tissue-Specific Enhancers
+
+Expected runtime for demo sequences design on a CPU-based desktop/workstation: ~10 min.
 
 To design your own tissue-specific enhancers for heart, limb, or CNS in the mouse embryo, follow the steps below.
 ```
