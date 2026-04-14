@@ -52,17 +52,18 @@ pip install deeplift==0.6.13.0
 ## Sequence-to-accessibility Model training
 Data were used for Sequence-to-accessibility model training are uploaded at Hugging Face: [accessibility_model_dataset](https://huggingface.co/datasets/Shenzhi-Chen/DeepSTARR-Mouse-dataset/accessibility_model_dataset).
 
-Expected runtime for demo on a GPU-based desktop/workstation: ~30 min.
+Expected runtime for the demo on a GPU-based desktop/workstation: ~30 min.
 
-Run demo on demo_dataset/accessibility_data run the following script:
+To run the heart demo accessibility model training and generate predictions on the demo test dataset in `demo_dataset/accessibility_dataset`, run:
+
 ```
 accessibility_models/Train_DeepSTARR_and_interpretation.sh \
             -d demo_dataset/accessbility_dataset/demo \
             -a DeepSTARR \
             -v score \
-            -o demo \
+            -o demo_accessibility \
             -p demo_dataset/accessbility_dataset/demo_sequences_test.fa \
-            -c 1 \
+            -c 0 \
             -t heart \
             -f demo
 ```
@@ -96,7 +97,26 @@ accessibility_model/heart/results_fold01_heart_DeepSTARR_rep1
 ## Sequence-to-activity Model training
 Data were used for Sequence-to-activity model training are uploaded at Hugging Face: [enhancer_activity_models](https://huggingface.co/datasets/Shenzhi-Chen/DeepSTARR-Mouse-dataset/tree/main/enhancer_activity_model_dataset). Data were used for evaluation model are uploaded at Hugging Face: [testing_dataset](https://huggingface.co/datasets/Shenzhi-Chen/DeepSTARR-Mouse-dataset/tree/main/testing_dataset).
 
-Expected runtime for demo (1 fold and 1 replicate) on a GPU-based desktop/workstation: ~1 hour.
+Expected runtime for the demo on a GPU-based desktop/workstation: ~30 min.
+
+To run the heart demo activity model training and generate predictions on the demo test dataset in `demo_dataset/activity_data`, run:
+
+```
+
+Enhancer_activity_model_training/Train_transfer_learning_model.py \
+                                    -i demo_dataset/activity_dataset/demo \
+                                    -v class \
+                                    -a demo_accessibility/Model \
+                                    -o demo_activity/Model
+
+Enhancer_activity_model_training/Predict_CNN_model_from_fasta.py \
+                                    -s demo_dataset/activity_dataset/demo_sequences_test.fa \
+                                    -m demo_activity/Model \
+                                    -o demo_activity
+
+```
+
+Expected runtime for 1 fold and 1 replicate for 1 tissue on a GPU-based desktop/workstation: ~1 hour.
 
 To train and evaluate models across 3 cross-validation folds for 3 tissues (heart, limb, midbrain/CNS), download the `enhancer_activity_model_dataset` and run the following script:
 ```
