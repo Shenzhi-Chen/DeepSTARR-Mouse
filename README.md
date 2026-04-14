@@ -12,10 +12,10 @@ Not required for demo or inference; GPU acceleration is recommended for model tr
 
 ## System requirements
 
-DeepSTARR-Mouse was developed and tested in Linux environments with Python 3.7.  
-Model inference can be run on a standard CPU-based desktop or workstation.  
-GPU acceleration is recommended for model training, nucleotide contribution scoring, and large-scale enhancer design.  
-The models used in this study were trained on CUDA-compatible NVIDIA GPUs.
+- DeepSTARR-Mouse was developed and tested in Linux environments with Python 3.7.  
+- Model inference can be run on a standard CPU-based desktop or workstation.  
+- GPU acceleration is recommended for model training, nucleotide contribution scoring, and large-scale enhancer design.  
+- The models used in this study were trained on CUDA-compatible NVIDIA GPUs.
 
 ## Software dependencies
 
