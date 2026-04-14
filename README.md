@@ -11,7 +11,9 @@ Not required for demo or inference; GPU acceleration is recommended for model tr
 
 ## Installation
 
-To install DeepSTARR-Mouse for training, prediction and design new enhancers, please run the following script:
+To install DeepSTARR-Mouse for model training, sequence prediction, and de novo enhancer design, please run the commands below.
+
+Expected installation time: ~20–30 min.
 
 ```
 # Clone this repository
