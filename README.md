@@ -102,7 +102,6 @@ Expected runtime for the demo on a GPU-based desktop/workstation: ~30 min.
 To run the heart demo activity model training and generate predictions on the demo test dataset in `demo_dataset/activity_data`, run:
 
 ```
-
 Enhancer_activity_model_training/Train_transfer_learning_model.py \
                                     -i demo_dataset/activity_dataset/demo \
                                     -v class \
