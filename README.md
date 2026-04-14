@@ -52,14 +52,29 @@ pip install deeplift==0.6.13.0
 ## Sequence-to-accessibility Model training
 Data were used for Sequence-to-accessibility model training are uploaded at Hugging Face: [accessibility_model_dataset](https://huggingface.co/datasets/Shenzhi-Chen/DeepSTARR-Mouse-dataset/accessibility_model_dataset).
 
-Expected runtime for demo (1 fold and 1 replicate) on a GPU-based desktop/workstation: ~1-2 hour.
+Expected runtime for demo on a GPU-based desktop/workstation: ~30 min.
 
-To train and evaluate models across 3 cross-validation folds for 6 tissues (heart, limb, midbrain/CNS, forebrain, hindbrain and neural tube), download the `accessibility_model_dataset` and run the following script:
+Run demo on demo_dataset/accessibility_data run the following script:
+```
+accessibility_models/Train_DeepSTARR_and_interpretation.sh \
+    		    -d demo_dataset/accessbility_dataset/demo \
+    		  	-a DeepSTARR \
+            -v score \
+    		  	-o demo \
+            -p demo_dataset/accessbility_dataset/demo_sequences_test.fa \
+    		  	-c 1 \
+            -t heart \
+            -f demo
+```
+
+Expected runtime for 1 folds 1 replicates for on tissue on a GPU-based desktop/workstation: ~1 min.
+
+To train and evaluate models across 3 cross-validation folds for 3 tissues (heart, limb, midbrain/CNS), download the `accessibility_model_dataset` and run the following script:
 ```
 Accessibility_model_training/Run_models.sh
 ```
 
-This script trains 2 replicates for each of the 3 cross-validation folds across the 6 tissues, creating a total of 36 models. For each model, it generates predictions and computes nucleotide contribution scores on the held-out test dataset.
+This script trains 2 replicates for each of the 3 cross-validation folds across the 6 tissues, creating a total of 18 models. For each model, it generates predictions and computes nucleotide contribution scores on the held-out test dataset.
 
 Outputs are saved in separate directories. For example, the output for the heart model from fold 1, replicate 1 is located at:
 ```
@@ -83,11 +98,11 @@ Data were used for Sequence-to-activity model training are uploaded at Hugging F
 
 Expected runtime for demo (1 fold and 1 replicate) on a GPU-based desktop/workstation: ~1 hour.
 
-To train and evaluate models across 3 cross-validation folds for 6 tissues (heart, limb, midbrain/CNS, forebrain, hindbrain and neural tube), download the `enhancer_activity_model_dataset` and run the following script:
+To train and evaluate models across 3 cross-validation folds for 3 tissues (heart, limb, midbrain/CNS), download the `enhancer_activity_model_dataset` and run the following script:
 ```
 Enhancer_activity_model_training/Run_models.sh
 ```
-This script trains 2 replicates for each of the 3 cross-validation folds across the 6 tissues, creating a total of 36 models. For each model, it generates predictions and computes nucleotide contribution scores on the held-out test dataset.
+This script trains 2 replicates for each of the 3 cross-validation folds across the 6 tissues, creating a total of 18 models. For each model, it generates predictions and computes nucleotide contribution scores on the held-out test dataset.
 
 Outputs are saved in separate directories. For example, the output for the heart model from fold 1, replicate 1 is located at:
 ```
