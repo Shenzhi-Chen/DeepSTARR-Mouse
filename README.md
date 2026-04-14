@@ -24,7 +24,6 @@ Main dependencies include:
 - keras 2.4.3
 - h5py < 3.0.0
 - deeplift 0.6.13.0
-- shap (installed from GitHub)
 - ledidi 2.1.0 (required for enhancer design)
 
 ## Installation
