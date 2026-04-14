@@ -68,7 +68,6 @@ To train and evaluate models across 3 cross-validation folds for 6 tissues (hear
 ```
 Enhancer_activity_model_training/Run_models.sh
 ```
-
 This script trains 2 replicates for each of the 3 cross-validation folds across the 6 tissues, creating a total of 36 models. For each model, it generates predictions and computes nucleotide contribution scores on the held-out test dataset.
 
 Outputs are saved in separate directories. For example, the output for the heart model from fold 1, replicate 1 is located at:
@@ -110,7 +109,6 @@ enhancer_activity_model/heart/results_fold01_heart_DeepSTARR_rep1_init_random
 # Predictions on held-out test dataset
 - fold01_sequences_test.fa_predictions_Model.txt
 ```
-
 (ii) The enhancer activity predictions derived from the corresponding sequence-to-accessibility model (e.g., for heart, fold 1, replicate 1) are saved at:
 ```
 accessibility_model/heart/results_fold01_heart_DeepSTARR_rep1/enhancer
@@ -153,7 +151,6 @@ ledidi_design/heart/results_fold01_heart_DeepSTARR_rep1/1
 # 20 designed tissue specific enhancers
 - 1adjusted12_14_designed_sequence_evolution.fasta 
 ```
-
 ## Prediction for new DNA sequences
 
 Expected runtime for demo sequences design on a CPU-based desktop/workstation: ~3 min.
@@ -166,7 +163,6 @@ python Accessibility_model_training/Predict_CNN_model_from_fasta.py \
   -s Sequences_example.fa \
   -m accessibility_models/heart/results_fold01_heart_DeepSTARR_rep1/Model \
   -o Sequences_example
-
 ```
 
 Where:
