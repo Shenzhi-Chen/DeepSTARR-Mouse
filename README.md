@@ -171,6 +171,30 @@ accessibility_model/heart/results_fold01_heart_DeepSTARR_rep1/enhancer
 - fold01_sequences_test.fa_predictions_Model.txt
 ```
 
+## Transfer-learning using inferred labels
+To extend our framework for in vivo enhancer design in mammals beyond reliance on such data, we explored whether it can be applied to predicted enhancer-activity labels inferred from readily available genomic features.
+(i).  **promoter_distal_no_CTCF_model_dataset:** Inferred candidate enhancer-activity labels based on ATAC-seq peaks distal from promoters and CTCF-bound regions. The data used for model training are available on Hugging Face: [promoter_distal_no_CTCF_model_dataset](https://huggingface.co/datasets/Shenzhi-Chen/DeepSTARR-Mouse-dataset/tree/main/promoter_distal_no_CTCF_model_dataset)
+(ii).  **K27Ac_K4me1_model_dataset:** Inferred candidate enhancer-activity labels based on ATAC-seq peaks marked by H3K27ac and H3K4me1. The data used for model training are available on Hugging Face: [K27Ac_K4me1_model_dataset](https://huggingface.co/datasets/Shenzhi-Chen/DeepSTARR-Mouse-dataset/tree/main/K27Ac_K4me1_model_dataset)
+(iii). **tissue_specific_ATAC_seq_model_dataset:** Inferred candidate enhancer-activity labels based on tissue-specific ATAC-seq peaks. The data used for model training are available on Hugging Face:[tissue_specific_ATAC_seq_model_dataset](https://huggingface.co/datasets/Shenzhi-Chen/DeepSTARR-Mouse-dataset/tree/main/tissue_specific_ATAC_seq_model_dataset)
+
+
+Expected runtime on a GPU-based desktop/workstation: ~6 hour.
+
+To run these replacement transfer learning experiments, execute the following script:
+```
+replacement_transfer_learning/replacement_transfer_learning_training.sh
+```
+The outputs for models trained on **promoter_distal_no_CTCF_model_dataset**, **K27Ac_K4me1_model_dataset**, and **tissue_specific_ATAC_seq_model_dataset** are saved in their corresponding folders. Example output paths for heart, fold 1, replicate 1 are:
+```
+promoter_distal_no_CTCF_model_dataset/heart/fold01_rep1
+K27Ac_K4me1_model_dataset/heart/fold01_rep1
+tissueSpecATAC/heart/fold01_rep1
+
+# Trained model
+- Model.json # Model archeticture
+- Model.h5 # Trained model weights
+```
+
 ### Ledidi Tissue-Specific Enhancer Design
 
 This section describes how to design novel tissue-specific enhancers using **Ledidi**, a model-guided gradient optimization approach ([Jacob et al., 2022](https://www.biorxiv.org/content/10.1101/2025.04.22.650035v1)).
