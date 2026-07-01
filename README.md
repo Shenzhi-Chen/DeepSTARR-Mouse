@@ -296,10 +296,10 @@ Where:
 * -l A parameter to control the magnitude of edits. Smaller values result in fewer edits to the starting sequences.
 
 ## Analysis of motif syntax rules
-The custom code used for the analysis of motif syntax rules is available in the motif_syntax_rules_analysis folder.
+The custom code used for the analysis of motif syntax rules is available in the `motif_syntax_rules_analysis` folder.
 
 ## De novo motif discovery analysis
-The custom code and required datasets used for the de novo motif discovery analysis are available in the De_novo_motif_discovery folder.
+The custom code and required datasets used for the de novo motif discovery analysis are available in the `De_novo_motif_discovery` folder.
 
 ## License
 
