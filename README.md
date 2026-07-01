@@ -296,9 +296,7 @@ Where:
 * -l A parameter to control the magnitude of edits. Smaller values result in fewer edits to the starting sequences.
 
 ## Analysis of motif syntax rules
-
 The custom code used for the analysis of motif syntax rules is available in the motif_syntax_rules_analysis folder.
-
 
 ## License
 
