@@ -2,9 +2,7 @@
 
 DeepSTARR-Mouse is a Convolutional Neural Network (CNN) adapted from the previously published DeepSTARR architecture [(Nature Genetics, 2022)](https://www.nature.com/articles/s41588-022-01048-5). This model is designed for use in a transfer-learning framework to predict enhancer activity in E11.5 mouse embryos. For each tissue, CNNs are pre-trained on DNA accessibility data (i.e., ATAC-seq) and fine-tuned on a limited set of experimentally validated enhancers (VISTA enhancer browser, [https://enhancer.lbl.gov/vista/](https://enhancer.lbl.gov/vista/)).
 
-*Predictive design of tissue-specific mammalian enhancers that function in vivo in the mouse embryo*
-
-Shenzhi Chen, Vincent Loubiere, Ethan W. Hollingsworth, Ken Murakami, Nikolaus Mandlburger, Sandra H. Jacinto, Atrin Dizehchi, Jacob Schreiber, Evgeny Z. Kvon, Alexander Stark. 2025
+[*Predictive design of tissue-specific mammalian enhancers that function in the mouse embryo*](https://www.nature.com/articles/s41588-026-02729-1)
 
 This repository contains the code used to train the models, make predictions, and design tissue-specific enhancers by [Ledidi](https://www.biorxiv.org/content/10.1101/2025.04.22.650035v1).
 
@@ -51,7 +49,7 @@ pip install deeplift==0.6.13.0
 ```
 
 ## Sequence-to-accessibility Model training
-Data were used for Sequence-to-accessibility model training are uploaded at Hugging Face: [accessibility_model_dataset](https://huggingface.co/datasets/Shenzhi-Chen/DeepSTARR-Mouse-dataset/accessibility_model_dataset).
+Data were used for Sequence-to-accessibility model training are uploaded at Hugging Face: [accessibility_model_dataset](https://huggingface.co/datasets/Shenzhi-Chen/DeepSTARR-Mouse-dataset/tree/main/accessibility_model_dataset).
 
 Expected runtime for the demo on a GPU-based desktop/workstation: ~20 min.
 
