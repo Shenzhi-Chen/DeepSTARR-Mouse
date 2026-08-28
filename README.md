@@ -2,7 +2,7 @@
 
 DeepSTARR-Mouse is a Convolutional Neural Network (CNN) adapted from the previously published DeepSTARR architecture [(Nature Genetics, 2022)](https://www.nature.com/articles/s41588-022-01048-5). This model is designed for use in a transfer-learning framework to predict enhancer activity in E11.5 mouse embryos. For each tissue, CNNs are pre-trained on DNA accessibility data (i.e., ATAC-seq) and fine-tuned on a limited set of experimentally validated enhancers (VISTA enhancer browser, [https://enhancer.lbl.gov/vista/](https://enhancer.lbl.gov/vista/)).
 
-[*Predictive design of tissue-specific mammalian enhancers that function in the mouse embryo*](https://www.nature.com/articles/s41588-026-02729-1)
+Chen, S., Loubiere, V., Hollingsworth, E.W. et al. *Predictive design of tissue-specific mammalian enhancers that function in the mouse embryo.* Nat Genet (2026). https://doi.org/10.1038/s41588-026-02729-1
 
 This repository contains the code used to train the models, make predictions, and design tissue-specific enhancers by [Ledidi](https://www.biorxiv.org/content/10.1101/2025.04.22.650035v1).
 
